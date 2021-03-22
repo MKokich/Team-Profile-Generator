@@ -41,8 +41,6 @@ function addManager(){
     
 }
 
-addManager();
-
 function addIntern(){
     inquirer.prompt([
         {
