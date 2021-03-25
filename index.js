@@ -137,7 +137,6 @@ function ask() {
             console.log("They're done")
             let html= startingHtml
             employees.forEach(employee => {
-                console.log(employee.getRole)
                 if (employee.getRole() === "Manager"){
                     html += managerCard(employee)
                     
