@@ -1,5 +1,5 @@
 const inquirer = require("inquirer");
-// const generateHtml = require();
+// const generateHtml = require("./generateHtml");
 const fs = require("fs")
 let employees = [];
 const Employee = require("./lib/Employee")
@@ -111,9 +111,9 @@ function addEngineer(){
 
 
 
-function writeToFile(fileName, data) {
+function writeToFile(data) {
     
-    fs.writeFileSync(fileName, data);
+    fs.writeFileSync("index.html", data);
   }
 addManager();
 
@@ -135,7 +135,75 @@ function ask() {
         
         else  {
             console.log("They're done")
-          // html
+            let html= startingHtml
+            employees.forEach(employee => {
+                console.log(employee.getRole)
+                if (employee.getRole() === "Manager"){
+                    html += managerCard(employee)
+                    
+                }
+                else if (employee.getRole() === "Intern"){
+                    html += internCard(employee)
+                }
+                else {
+                    html += engineerCard(employee)
+                }
+            });
+            html += closingHtml
+            
+            writeToFile(html);
         }
     })
 }
+
+    const startingHtml = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Team Profile</title>
+    </head>
+    <body>
+    <h1>Team Profile</h1>`
+
+    const closingHtml = `
+    <div class= "push"></div>
+    </body>
+        </html>`
+
+    const engineerCard = (data) => {
+        return `<div class="Engineer-card card">
+   <div class="card-title">Engineer: ${data.name}</div>
+   <div class="card-body">
+       <div>ID: ${data.id}</div>
+       <div>Email: ${data.email}</div>
+       <div>Github Username: ${data.github}</div>
+     </div>
+   </div>`
+    }
+
+    const managerCard = (data) => {
+        return `<div class="Manager-card card">
+    <div class="card-title">Manager: ${data.name}</div>
+    <div class="card-body">
+        <div>ID: ${data.id}</div>
+        <div>Email: ${data.email}</div>
+        <div>Office number: ${data.officeNumber}</div>
+      </div>
+    </div>`
+    }
+
+    const internCard = (data) => {
+        return `<div class="Intern-card card">
+    <div class="card-title">Intern: ${data.name}</div>
+    <div class="card-body">
+        <div>ID: ${data.id}</div>
+        <div>Email: ${data.email}</div>
+        <div>School: ${data.school}</div>
+      </div>
+    </div>` 
+    }
