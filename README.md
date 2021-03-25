@@ -14,7 +14,7 @@ This application works efficiently and generates a properly formatted HTML page 
 
 ## Video of Team Profile Generator
 
-[Video]("https://drive.google.com/file/d/1tRaLEayikd_hLwKJG6uBqv3jEr-xyKUv/preview")
+[Video](https://drive.google.com/file/d/1tRaLEayikd_hLwKJG6uBqv3jEr-xyKUv/preview)
 
 ## License
 
